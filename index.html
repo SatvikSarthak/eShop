@@ -1,0 +1,149 @@
+<?php
+    session_start(); // Start the session
+
+    // Check if the logout button is clicked
+    if(isset($_POST['logout'])) {
+        // Unset all session variables
+        session_unset();
+
+        // Destroy the session
+        session_destroy();
+
+        // Redirect to the login page or any other desired page
+        header("Location: login.php");
+        exit();
+    }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eShop</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io\apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io\favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io\favicon-16x16.png">
+    <link rel="manifest" href="favicon_io\site.webmanifest">
+    <link rel="stylesheet" href="style_index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap" rel="stylesheet">
+</head>
+<body class="font" style="background-color: #e4e6e6;">
+    <div class="header">
+      <img src="logo.png" alt="Logo" width="200">
+        <h1>Welcome 
+            <?php        
+            // Check if the session variable is set and not empty
+            if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+                // Display the user's name
+                echo $_SESSION['username'];
+            } else {
+                // If the session variable is not set or empty, display a default message
+                echo "Guest";
+            }
+            ?>, to our Online Store</h1>
+    </div>
+    <div class="navbar">
+        <!-- If user is logged in, show logout button -->
+        <?php if(isset($_SESSION['username'])) { ?>
+            <form action="" method="post">
+                <button type="submit" name="logout">Logout</button>
+            </form>
+        <?php } else { ?>
+            <!-- If user is not logged in, show login/signup button -->
+            <a href="customer_registration.html">Sign in or Login</a>
+        <?php } ?>
+        <a href="#categoriesSection">Categories</a>
+        <a href="customerService.html">Customer Service</a>
+    </div>
+    <div class="slideshow-container">
+        <div class="slide fade">
+            <img class="widthofimg" src="Images/img_for_index/babycare.jpg" alt="babycare">
+          </div>
+          <div class="slide fade">
+            <img class="widthofimg" src="Images/img_for_index/footwear.jpg" alt="footwear">
+          </div>
+          <div class="slide fade">
+            <img class="widthofimg" src="Images/img_for_index/mobileaccessories.jpg" alt="mobileaccessories">
+          </div>
+          <div class="slide fade">
+            <img class="widthofimg" src="Images/img_for_index/skincare.jpg" alt="skincare">
+          </div>
+          <div class="slide fade">
+            <img class="widthofimg" src="Images/img_for_index/petcare.jpg" alt="petcare">
+          </div>
+          <div class="slide fade">
+            <img class="widthofimg" src="Images/img_for_index/tshirts.jpg" alt="tshirts">
+          </div>
+          <div class="slide fade">
+            <img class="widthofimg" src="Images/img_for_index/homekitchenoutdoor.jpg" alt="homekitchenoutdoor">
+          </div>
+          <div class="slide fade">
+            <img class="widthofimg" src="Images/img_for_index/dailyneed.jpg" alt="dailyneed">
+          </div>
+        </div>
+        <script src="slideShow.js"></script>
+    </div>
+    <div id="categoriesSection" class="categoriesSection">
+      <div class="category">
+          <a href="electronic.html">
+              <img src="Images/img_for_categories/electronics.png" alt="Electronics">
+              <h3>Electronics Gadgets</h3>
+          </a>
+      </div>
+      <div class="category">
+        <a href="health_and_beauty.html">
+              <img src="Images/img_for_categories/healthandbeauty.png" alt="Health and Beauty">
+              <h3>Health and Beauty</h3>
+          </a>
+      </div>
+      <div class="category">
+        <a href="Fashion.html">
+              <img src="Images/img_for_categories/fashion.png" alt="Fashion">
+              <h3>Fashion</h3>
+          </a>
+      </div>
+      <div class="category">
+        <a href="IndustrialEquipment.html">
+              <img src="Images/img_for_categories/industrialequipment.png" alt="Industrial Equipment">
+              <h3>Industrial Equipment</h3>
+          </a>
+      </div>
+      <div class="category">
+        <a href="Home_and_Garden.html">
+              <img src="Images/img_for_categories/homeandgarden.png" alt="Home and Garden">
+              <h3>Home and Garden</h3>
+          </a>
+      </div>
+      <div class="category">
+        <a href="Sports.html">
+              <img src="Images/img_for_categories/sports.png" alt="Sports">
+              <h3>Sports</h3>
+          </a>
+      </div>
+  </div>  
+    <div class="footer">
+        <div class="footcard">
+            <em>About Us</em><br>
+                Welcome to [E-commerce Platform], a project developed by [Manipal University Jaipur] students to revolutionize online shopping for the university community and beyond.<br>
+
+<em>Meet the Team</em><br>
+Our team consists of passionate individuals from diverse backgrounds, including e-commerce, design, and technology. Together, we are committed to driving positive change and making a difference in the online shopping landscape.<br>
+
+<em>Our Values</em><br>
+At [E-commerce Platform], we uphold values of integrity, reliability, and transparency. We believe in fostering trust with our customers and partners through honesty and ethical business practices.<br>
+
+<em>Future Plans</em><br>
+Looking ahead, we are excited about the possibilities that lie ahead for [E-commerce Platform]. We envision expanding our product offerings, enhancing our user experience, and reaching new heights of success.<br>
+
+Join us on this journey as we continue to innovate and inspire through [E-commerce Platform].
+        </div>
+        <div class="footcard">
+            Contact Us<br>
+              <a href="mailto:shashankk085@gmail.com?subject=This mail is from Ecommerce website.">E-mail</a><br>
+              <a href="https://www.linkedin.com/login">Linkedin</a><br>
+        </div>
+    </div>
+</body>
+</html>

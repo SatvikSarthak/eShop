@@ -1,0 +1,109 @@
+.font {
+    font-family: "M PLUS 1 Code", monospace;
+    font-optical-sizing: auto;
+    font-weight: 0;
+    font-style: normal;
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+    background-color: #c9cbcc;
+    border-radius: 15px;
+    width: 90%;
+    margin: 5%;
+}
+
+.header img {
+    width: 10%;
+}
+
+.header h1 {
+    padding: 2%;
+}
+
+.body {
+    width: 90%;
+    margin: 5%;
+    background-color: #eefbff;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.body p {
+    padding: 8px 16px 8px 16px;
+}
+
+.option {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: #f0f0f0;
+}
+
+.option:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+/* Form  */
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.input-container > * {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.formcontainer {
+    width: 70%;
+    margin-left: 10%;
+    padding: 25px;
+    background-color: #eef1f2;
+    border-radius: 15px;
+}
+
+select,
+input[type=text],
+input[type=email],
+input[type=tel] {
+    text-align: center;
+    width: calc(50% - 5px);
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    background-color: #f7f7f7;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1;
+    box-shadow: 0 9px #999;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+input[type=submit]:onclick {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}

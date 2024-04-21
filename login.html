@@ -1,0 +1,59 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Database connection details
+    $servername = "localhost:3307";
+    $username = "root";
+    $password = "";
+    $dbname = "ecommerce";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Prepare SQL statement to select user with the provided username
+    $sql = "SELECT * FROM customers WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+
+    // Bind parameters
+    $stmt->bind_param("s", $username);
+
+    // Execute query
+    $stmt->execute();
+
+    // Get result
+    $result = $stmt->get_result();
+
+    // Check if a row with the given username exists
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        // Verify password using password_verify
+        if (password_verify($password, $row['password'])) {
+            // Start the session
+            session_start();
+
+            // Store username in session variable
+            $_SESSION['username'] = $username;
+
+            // Redirect user to index.html if credentials are correct
+            header("Location: index.php");
+            exit();
+        } else {
+            echo "Incorrect password. Please try again.";
+        }
+    } else {
+        echo "Incorrect username. Please try again.";
+    }
+
+    // Close statement and connection
+    $stmt->close();
+    $conn->close();
+}
+?>

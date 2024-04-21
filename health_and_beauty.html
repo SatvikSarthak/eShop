@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category: Health and Beauty</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io\apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io\favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io\favicon-16x16.png">
+    <link rel="manifest" href="favicon_io\site.webmanifest">
+    <link rel="stylesheet" href="style_index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_category.css">
+</head>
+<body class="font" style="background-color: #e4e6e6;">
+    <div class="headcontent">
+        <img src="logo.png" alt="Logo" width="10%">
+        <h1>Category: Health and Beauty</h1><br>
+    </div>
+    <div class="container" id="productContainer">
+        <!-- Products should be dynamically added here -->
+    </div>
+    <div id="orderButtonContainer" style="text-align: center;">
+        <button id="orderButton" style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
+            Order Now
+        </button>
+    </div>
+    <div id="cartContainer" style="display: none;">
+        <h2>Cart</h2>
+        <ul id="cartItems"></ul>
+    </div>
+    <script>
+        document.getElementById("orderButton").addEventListener("click", function() {
+            window.location.href = "shippingAddress.php";
+        });
+    
+        function orderProduct(productId, productName) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        sessionStorage.setItem(productId, productName);
+                    } else {
+                        alert(response.message);
+                    }
+                }
+            };
+            xhr.open("POST", "get_products_healthandbeauty.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("product_id=" + productId);
+        }
+        
+        function getProducts() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var productContainer = document.getElementById("productContainer");
+                    productContainer.innerHTML = xhr.responseText;
+                    
+                    var orderButtons = document.querySelectorAll(".orderButton");
+                    orderButtons.forEach(function(button) {
+                        button.addEventListener("click", function () {
+                            orderProduct(button.dataset.productId, button.dataset.productName);
+                        });
+                    });
+                }
+            };
+            xhr.open("GET", "get_products_healthandbeauty.php", true);
+            xhr.send();
+        }
+        
+        getProducts();
+        setInterval(getProducts, 2000);
+    </script><br><br><br>
+    <div class="footer">
+        <p>
+            <h3>Health and Beauty</h3><br>
+            Health and beauty can be important aspects of a womans life. There are many aspects to addressing health and beauty, including taking care of your hair, skin, and nails, and so health and beauty routines will vary from woman to woman.<br><br>
+            <em>What are the basics of health and beauty?</em><br>
+            Maintaining a healthy diet plays a major role in any health and beauty routine. The nutrients you receive from foods help maintain the beauty of your hair, skin, and nails. So if you dont think you have an optimal diet, taking vitamins can help provide nutrients you otherwise may not be receiving on a daily basis.<br><br>
+            <em>How do you maintain healthy hair?</em><br>
+            Your hair care routine is an important part of your beauty routine. Keeping it clean prevents build up that can make it look greasy or dull. Conditioning helps to improve its strength and fight against breakage. If you have curls, you may suffer from dryness. This dryness occurs because the oil from the scalp does not easily travel down the curls, making it hard to receive moisture. Manually applying oil would be beneficial in that case. You can also make use of creams and leave-in treatments. Imparting needed moisture is an essential component of hair care. Here are some of the basic products that will help you maintain the health of your hair:
+            <ul>
+                <li>Shampoo keeps hair clean and removes build up.</li>
+                <li>Conditioner helps improve strength and elasticity.</li>
+                <li>Oil helps to retain moisture and shine.</li>
+                <li>Moisturizer helps maintain elasticity.</li>
+            </ul><br>
+            <em>How do you maintain healthy skin?</em><br>
+            There are some important things to remember when it comes to your skin care beauty routine. Always remember to remove makeup, such as mascara and eyeliner, before going to bed. Avoid face washes that are strong. For example, too many harsh chemicals in a product can irritate your skin. Instead, use a good, gentle face wash to remove oil, dirt, or makeup. Most people overlook the use of a good night cream. Using an anti-aging cream before bed may help prevent or minimize fine lines and wrinkles. Here are some products that will help maintain the health of your skin:
+            <ul>
+                <li>Face wash: Cleansing daily helps to maintain clean and clear skin. It also prevents clogged pores.</li>
+                <li>Moisturizer: This fights dryness and keeps your skin glowing.</li>
+                <li>Skin Serum: Anti-aging serums prevent fine lines and wrinkles.</li>
+            </ul>
+            <br>
+            <em>How do you take care of your nails?</em><br>
+            Make sure your nails are clean and neatly shaped. Here are some tools for giving yourself a manicure and pedicure at home:
+            <ul>
+                <li>Nail files and clippers keep nails neat and trim.</li>
+                <li>Cuticle oil keeps your nails moisturized.</li>
+                <li>Nail hardener protects your nails from breaking.</li>
+            </ul><br>
+        </p>
+    </div>
+</body>
+</html>

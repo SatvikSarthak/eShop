@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+.font {
+  font-family: "M PLUS 1 Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: 0;
+  font-style: normal;
+}
+
+.categoriesSection {
+    width: 90%;
+    color: black;
+    margin: 5%;
+    background-color: #fcfeff;
+    font-size: larger;
+    padding: 1.5%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border-radius: 15px;
+  }
+  
+  .category {
+    width: 30%;
+    margin-bottom: 20px;
+  }
+  
+  .category a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .category img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .category h3 {
+    text-align: center;
+    margin-top: 10px;
+  }

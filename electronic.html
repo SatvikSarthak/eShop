@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category: Electronics Gadgets</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io\apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io\favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io\favicon-16x16.png">
+    <link rel="manifest" href="favicon_io\site.webmanifest">
+    <link rel="stylesheet" href="style_index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_category.css">
+</head>
+<body class="font" style="background-color: #e4e6e6;">
+    <div class="headcontent">
+        <img src="logo.png" alt="Logo" width="10%">
+        <h1>Category: Electronic Gadgets</h1><br>
+    </div>
+    <div class="container" id="productContainer">
+        <!-- Products should be dynamically added here -->
+    </div>
+    <div id="orderButtonContainer" style="text-align: center;">
+        <button id="orderButton" style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
+            Order Now
+        </button>
+    </div>
+    <div id="cartContainer" style="display: none;">
+        <h2>Cart</h2>
+        <ul id="cartItems"></ul>
+    </div>
+    <script>
+        document.getElementById("orderButton").addEventListener("click", function() {
+            window.location.href = "shippingAddress.php";
+        });
+    
+        function orderProduct(productId, productName) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        sessionStorage.setItem(productId, productName);
+                    } else {
+                        alert(response.message);
+                    }
+                }
+            };
+            xhr.open("POST", "get_products_electronics.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("product_id=" + productId);
+        }
+        
+        function getProducts() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var productContainer = document.getElementById("productContainer");
+                    productContainer.innerHTML = xhr.responseText;
+                    
+                    var orderButtons = document.querySelectorAll(".orderButton");
+                    orderButtons.forEach(function(button) {
+                        button.addEventListener("click", function () {
+                            orderProduct(button.dataset.productId, button.dataset.productName);
+                        });
+                    });
+                }
+            };
+            xhr.open("GET", "get_products_electronics.php", true);
+            xhr.send();
+        }
+        
+        getProducts();
+        setInterval(getProducts, 2000);
+    </script><br><br><br>
+    <div class="footer">
+        <p><h3>Frequently Asked Questions About Electronics</h3><br>
+            <em>How do computers enhance our lives?</em><br>
+            Laptop and desktop computers play a vital role in modern society by enabling communication, information access, and productivity. You'll find a wide range of computers for sale on eBay. They let you do anything from simple word processing to complex data analysis. They are necessary in both personal and professional settings.<br><br>
+            <em>Can video games have educational benefits?</em><br>
+            Yes, many video games are not only for entertaining but also serve educational purposes. Playing games can help improve cognitive skills, problem-solving abilities, hand-eye coordination, and even social skills. They often require collaborative gameplay and strategic thinking.<br><br>
+            <em>What factors should I consider when purchasing smartphones and smartwatches?</em><br>
+            When buying electronics such as an iPhone, Android phone, or a smartwatch, consider factors like screen size, memory card slot, and the camera system. Mobile devices are about more than just phone calls, so it's essential to research different options. You'll also want to consider the operating system and if it's compatible with Wi-Fi and Bluetooth.<br><br>
+            <em>How do I choose the right digital camera?</em><br>
+            Choosing the right digital camera depends on factors such as intended use, budget, features, and personal preferences. Consider aspects like resolution, zoom capabilities, size and weight, battery life, and what accessories it's compatible with. Also consider if the camera can take photos and videos.<br><br>
+            <em>How do I choose the right home audio equipment?</em><br>
+            Choosing the right home audio equipment depends on factors such as room size, desired audio quality, budget, and personal preferences. Think about speaker size, audio formats supported, connection options, and if it works with existing audio systems when making your selection. Buying used lets you get top quality equipment for an affordable price.<br><br>
+        </p>
+    </div>
+</body>
+</html>
